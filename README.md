@@ -53,6 +53,25 @@ oc expose service/my-nodejs-app
 
 You can also add the NPM_MIRROR environment variable to the build in case of locally configured repsository dependencies.
 
+### Using Builds for OpenShift: (TBC)
+
+First you need to install the Builds for OpenShift Operator:
+
+<img width="276" alt="Screenshot 2024-07-08 at 11 54 49 AM" src="https://github.com/osa-ora/angular-demo/assets/18471537/f2f5d78d-e95a-43f6-a9bf-a5fb4a70f6df">
+
+Once, installed create an instance of "Shipwright Build", keep the default
+
+<img width="696" alt="Screenshot 2024-07-08 at 12 32 03 PM" src="https://github.com/osa-ora/angular-demo/assets/18471537/ea1641f3-df9d-4dfd-86bd-9c27ade1e177">
+
+Now, you can deploy the application by creating a Shipwright build either from the console or from the command line:
+
+```
+//create an openshift project
+oc new-project dev
+
+//create shipwright build for our application in the 'dev' project
+
+```
 
 
 
