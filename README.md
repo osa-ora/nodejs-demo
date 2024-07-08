@@ -53,7 +53,7 @@ oc expose service/my-nodejs-app
 
 You can also add the NPM_MIRROR environment variable to the build in case of locally configured repsository dependencies.
 
-### Using Builds for OpenShift: (TBC)
+### Using Builds for OpenShift:
 
 First you need to install the Builds for OpenShift Operator:
 
@@ -70,13 +70,69 @@ Now, you can deploy the application by creating a Shipwright build either from t
 oc new-project dev
 
 //create shipwright build for our application in the 'dev' project
+//our project code is in the root of the Git repo, otherwise we could have used '--source-context-dir="docker-build"' flag to specify the context folder of our application.
+shp build create nodejs-s2i --strategy-name="source-to-image" --source-url="https://github.com/osa-ora/nodejs-demo" --output-image="image-registry.openshift-image-registry.svc:5000/dev2/nodejs-app" --builder-image="image-registry.openshift-image-registry.svc:5000/openshift/nodejs:16-ubi8"
+
+//start the build and follow the output
+shp build run nodejs-s2i --follow
+
+//create an application from the container image
+oc new-app nodejs-app
+
+//expose our application
+oc expose service/nodejs-app
+
+//test our application is deployed ..
+curl $(oc get route nodejs-app -o jsonpath='{.spec.host}')/
 
 ```
 
+You can do the same from the Dev Console
+
+Go to "Builds" section and click on Create and select "Shipwright Build"
+
+<img width="1189" alt="Screenshot 2024-07-08 at 12 38 53 PM" src="https://github.com/osa-ora/angular-demo/assets/18471537/9eb76e9b-1dc0-41a2-992e-ea49985ba513">
+
+Post the following content:
+
+```
+apiVersion: shipwright.io/v1beta1
+kind: Build
+metadata:
+  name: my-nodejs-app
+  namespace: dev
+spec:
+  output:
+    image: 'image-registry.openshift-image-registry.svc:5000/dev/nodejs-app'
+  paramValues:
+    - name: builder-image
+      value: 'image-registry.openshift-image-registry.svc:5000/openshift/nodejs:16-ubi8'
+  source:
+    git:
+      url: 'https://github.com/osa-ora/nodejs-demo'
+    type: Git
+  strategy:
+    kind: ClusterBuildStrategy
+    name: source-to-image
+```
+
+Click on Create and then click on "Start Build", follow the logs:
+
+<img width="1186" alt="Screenshot 2024-07-08 at 5 33 38 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/37a92158-1fc5-4417-bbce-338609f067eb">
+
+
+Now, you can deploy the appliation using "oc new-app angular-app" or from the console using container image option:
+
+<img width="688" alt="Screenshot 2024-07-08 at 5 34 24 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/ce98efd2-f604-4ef5-b349-6ebcc445e1bf">
+
+
+Test the application route and we are done!
 
 
 
-
+---
+---
+---
 
 
 
