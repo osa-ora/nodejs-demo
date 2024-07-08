@@ -130,7 +130,7 @@ Test the application route and we are done!
 
 If you are building this using private repository artifact, just add to the file ".s2i/environment" the following entry:
 ```
-NPM_MIRROR={the private repository artifact repository}
+NPM_MIRROR={the private repository artifact URL}
 ```
 
 <img width="463" alt="Screenshot 2024-07-08 at 5 40 17 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/3ed26c32-12e6-489f-a9b9-30804eec9142">
