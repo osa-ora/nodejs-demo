@@ -1,3 +1,68 @@
+## NodeJS Deployment To OpenShift Demo
+
+We have plenty of options to deploy NodeJS Application to OpenShift, in this demo we will see some of these deployment options, this repo is fork from the following Git repo: https://github.com/sclorg/nodejs-ex
+
+
+### Using S2I from the Console
+
+Go to OpenShift Developer Console, Select NodeJS from the catalog and click on Create: 
+
+<img width="418" alt="Screenshot 2024-07-08 at 4 04 08 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/a9a9b74a-4183-4bcb-947f-6d1804f2c224">
+
+Fill in the Git Repo location "https://github.com/osa-ora/nodejs-demo" and application name:
+
+<img width="703" alt="Screenshot 2024-07-08 at 4 05 31 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/d2a10966-06ba-4d5f-a6eb-0d217d4f8a04">
+
+Select Build options as "Builds" and click on create.
+
+<img width="687" alt="Screenshot 2024-07-08 at 4 06 26 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/a99cb96e-ddcf-4b5c-b7a8-506371df3a87">
+
+Note: If you are using private NPM artifact repository, then you can just add an environment variable; NPM_MIRROR to point to this private artifact repository.
+<img width="1065" alt="Screenshot 2024-07-08 at 4 09 46 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/db13e80b-0e46-4e9e-8223-d196f066995d">
+
+The application will built and deployed into OpenShift and you can just test it by using the route:
+<img width="972" alt="Screenshot 2024-07-08 at 4 12 32 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/1e96d265-69b8-4283-bfd9-a554428f2ddf">
+
+In order to use the CRUD operations in the application, you need to deploy a Postgres DB, but this is not relevant to our NodeJS app deployment so we will not do it.
+
+
+### Using Tekton Pipeline from the Console
+
+Follow the same process but during the selection of Build Options select "Pipeline" option as following:
+
+<img width="700" alt="Screenshot 2024-07-08 at 4 17 36 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/94a0406e-b0f3-4dc2-861d-1004e12497f2">
+
+Follow the progress on the pipeline execution and once successfully finished, check the application deployment status.
+
+### Using Binary Build
+
+Execute the following commands from your local machine 
+
+Optionally you can install the dependencies, and in that case it will be a pure binary build, otherwise the builder image will install the dependencies for you.
+```
+npm install
+```
+
+Deploy the application as a binary build.
+```
+oc new-project dev
+oc new-app --image-stream=openshift/nodejs:16-ubi8 --name=my-nodejs-app .
+oc start-build my-nodejs-app --from-dir=.
+oc expose service/my-nodejs-app
+```
+
+You can also add the NPM_MIRROR environment variable to the build in case of locally configured repsository dependencies.
+
+
+
+
+
+
+
+
+
+
+Original Readme document: 
 
 ![Node.js CI](https://github.com/nodeshift-starters/nodejs-rest-http-crud/workflows/ci/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/nodeshift-starters/nodejs-rest-http-crud/badge.svg?branch=master)](https://coveralls.io/github/nodeshift-starters/nodejs-rest-http-crud?branch=master) 
