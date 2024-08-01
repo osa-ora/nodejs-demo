@@ -63,6 +63,12 @@ Once, installed create an instance of "Shipwright Build", keep the default
 
 <img width="696" alt="Screenshot 2024-07-08 at 12 32 03 PM" src="https://github.com/osa-ora/angular-demo/assets/18471537/ea1641f3-df9d-4dfd-86bd-9c27ade1e177">
 
+Install the Shipwright command line of the latest release from the following URL:
+
+```
+https://github.com/shipwright-io/cli/releases
+```
+
 Now, you can deploy the application by creating a Shipwright build either from the console or from the command line:
 
 ```
