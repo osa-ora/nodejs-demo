@@ -3,7 +3,7 @@
 We have plenty of options to deploy NodeJS Application to OpenShift, in this demo we will see some of these deployment options, this repo is fork from the following Git repo: https://github.com/sclorg/nodejs-ex
 
 
-### Using S2I from the Console
+### DEPLOYMENT OPTION 1: Using S2I from the Console
 
 Go to OpenShift Developer Console, Select NodeJS from the catalog and click on Create: 
 
@@ -26,7 +26,7 @@ The application will built and deployed into OpenShift and you can just test it 
 In order to use the CRUD operations in the application, you need to deploy a Postgres DB, but this is not relevant to our NodeJS app deployment so we will not do it.
 
 
-### Using Tekton Pipeline from the Console
+### DEPLOYMENT OPTION 2: Using Tekton Pipeline from the Console
 
 Follow the same process but during the selection of Build Options select "Pipeline" option as following:
 
@@ -34,7 +34,7 @@ Follow the same process but during the selection of Build Options select "Pipeli
 
 Follow the progress on the pipeline execution and once successfully finished, check the application deployment status.
 
-### Using Binary Build
+### DEPLOYMENT OPTION 3: Using Binary Build
 
 Execute the following commands from your local machine 
 
@@ -53,7 +53,7 @@ oc expose service/my-nodejs-app
 
 You can also add the NPM_MIRROR environment variable to the build in case of locally configured repsository dependencies.
 
-### Using Builds for OpenShift:
+### DEPLOYMENT OPTION 4: Using Builds for OpenShift:
 
 First you need to install the Builds for OpenShift Operator:
 
