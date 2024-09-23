@@ -9,16 +9,18 @@ Go to OpenShift Developer Console, Select NodeJS from the catalog and click on C
 
 <img width="418" alt="Screenshot 2024-07-08 at 4 04 08 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/a9a9b74a-4183-4bcb-947f-6d1804f2c224">
 
-Fill in the Git Repo location "https://github.com/osa-ora/nodejs-demo" and application name:
+Fill in the Git Repo location "https://github.com/osa-ora/nodejs-ocp-demo" and application name:
 
 <img width="703" alt="Screenshot 2024-07-08 at 4 05 31 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/d2a10966-06ba-4d5f-a6eb-0d217d4f8a04">
+
+Note: Git Reposiotry renamed to "nodejs-ocp-demo"
 
 Select Build options as "Builds" and click on create.
 
 <img width="687" alt="Screenshot 2024-07-08 at 4 06 26 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/a99cb96e-ddcf-4b5c-b7a8-506371df3a87">
 
 Note: If you are using private NPM artifact repository, then you can just add an environment variable; NPM_MIRROR to point to this private artifact repository.
-<img width="1065" alt="Screenshot 2024-07-08 at 4 09 46 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/db13e80b-0e46-4e9e-8223-d196f066995d">
+<img width="1065" alt="Screenshot 2024-07-08 at 4 09 46 PM" src="https://github.com/osa-ora//assets/18471537/db13e80b-0e46-4e9e-8223-d196f066995d">
 
 The application will built and deployed into OpenShift and you can just test it by using the route:
 <img width="972" alt="Screenshot 2024-07-08 at 4 12 32 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/1e96d265-69b8-4283-bfd9-a554428f2ddf">
@@ -77,7 +79,7 @@ oc new-project dev
 
 //create shipwright build for our application in the 'dev' project
 //our project code is in the root of the Git repo, otherwise we could have used '--source-context-dir="docker-build"' flag to specify the context folder of our application.
-shp build create nodejs-s2i --strategy-name="source-to-image" --source-url="https://github.com/osa-ora/nodejs-demo" --output-image="image-registry.openshift-image-registry.svc:5000/dev2/nodejs-app" --builder-image="image-registry.openshift-image-registry.svc:5000/openshift/nodejs:16-ubi8"
+shp build create nodejs-s2i --strategy-name="source-to-image" --source-url="https://github.com/osa-ora/nodejs-ocp-demo" --output-image="image-registry.openshift-image-registry.svc:5000/dev2/nodejs-app" --builder-image="image-registry.openshift-image-registry.svc:5000/openshift/nodejs:16-ubi8"
 
 //start the build and follow the output
 shp build run nodejs-s2i --follow
@@ -115,7 +117,7 @@ spec:
       value: 'image-registry.openshift-image-registry.svc:5000/openshift/nodejs:16-ubi8'
   source:
     git:
-      url: 'https://github.com/osa-ora/nodejs-demo'
+      url: 'https://github.com/osa-ora/nodejs-ocp-demo'
     type: Git
   strategy:
     kind: ClusterBuildStrategy
