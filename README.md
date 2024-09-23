@@ -20,7 +20,8 @@ Select Build options as "Builds" and click on create.
 <img width="687" alt="Screenshot 2024-07-08 at 4 06 26 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/a99cb96e-ddcf-4b5c-b7a8-506371df3a87">
 
 Note: If you are using private NPM artifact repository, then you can just add an environment variable; NPM_MIRROR to point to this private artifact repository.
-<img width="1065" alt="Screenshot 2024-07-08 at 4 09 46 PM" src="https://github.com/osa-ora//assets/18471537/db13e80b-0e46-4e9e-8223-d196f066995d">
+
+<img width="1065" alt="Screenshot 2024-07-08 at 4 09 46 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/db13e80b-0e46-4e9e-8223-d196f066995d">
 
 The application will built and deployed into OpenShift and you can just test it by using the route:
 <img width="972" alt="Screenshot 2024-07-08 at 4 12 32 PM" src="https://github.com/osa-ora/nodejs-demo/assets/18471537/1e96d265-69b8-4283-bfd9-a554428f2ddf">
